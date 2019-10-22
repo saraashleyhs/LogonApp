@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, FormControl } from "@angular/forms";
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
@@ -19,8 +19,17 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     this.userProfile = this.formbuilder.group({
-      
-    })
+      dateOfBirth: new FormControl(),
+      homeAddress: new FormGroup({
+        street: new FormControl(),
+        city: new FormControl(),
+        zipcode: new FormControl()
+      }),
+      faveFood: new FormControl(),
+      faveMovie: new FormControl(),
+      faveArtist: new FormControl(),
+      hobbies: new FormControl()
+    });
   }
 
 }
