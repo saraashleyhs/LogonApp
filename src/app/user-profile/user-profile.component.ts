@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormControl } from "@angular/forms";
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
+import { UserProfileServiceService } from '../services/user-profile-service.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -12,6 +13,7 @@ import { first } from 'rxjs/operators';
 export class UserProfileComponent implements OnInit {
   userProfile: FormGroup;
   constructor(
+    private userprofileService: UserProfileServiceService,
     private formbuilder: FormBuilder,
     private authService: AuthService,
     private router: Router
@@ -30,6 +32,10 @@ export class UserProfileComponent implements OnInit {
       faveArtist: new FormControl(),
       hobbies: new FormControl()
     });
+  }
+//post method
+  onSubmit(){
+    this.userprofileService.post(this.userProfile).subscribe(data =>(this.userProfile = data));
   }
 
 }
